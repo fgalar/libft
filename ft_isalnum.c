@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclr.c                                        :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/14 15:52:14 by fgarault          #+#    #+#             */
-/*   Updated: 2019/04/14 15:54:15 by fgarault         ###   ########.fr       */
+/*   Created: 2019/04/12 22:42:07 by fgarault          #+#    #+#             */
+/*   Updated: 2019/04/12 22:52:28 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strclr(char *s)
+int		ft_isalnum(int c)
 {
-	ft_bzero(s, ft_strlen(s));
+	if (ft_isalpha(c) == 1 || ft_isdigit(c) == 1)
+		return (1);
+	return (0);
 }

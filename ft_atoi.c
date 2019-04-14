@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striter.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/14 17:00:40 by fgarault          #+#    #+#             */
-/*   Updated: 2019/04/14 18:52:38 by fgarault         ###   ########.fr       */
+/*   Created: 2019/04/13 18:26:46 by fgarault          #+#    #+#             */
+/*   Updated: 2019/04/14 19:26:48 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striter(char *s, void (*f)(char *))
+int		ft_atoi(const char *str)
 {
 	int		i;
+	int		sign;
+	int		res;
 
 	i = 0;
-	while (s[i])
+	sign = 1;
+	res = 0;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\r' || str[i] == '\v'
+	|| str[i] == '\f' || str[i] == ' ' || str[i] == '0')
+		i++;
+	if (str[i] == '\0')
+		return (0);
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i] <= '9' && str[i] >= '0')
 	{
-		f(&s[i]);
+		res = res * 10 + (str[i] - '0');
 		i++;
 	}
+	return (res * sign);
 }

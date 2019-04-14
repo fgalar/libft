@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclr.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/14 15:52:14 by fgarault          #+#    #+#             */
-/*   Updated: 2019/04/14 15:54:15 by fgarault         ###   ########.fr       */
+/*   Created: 2019/04/12 23:22:11 by fgarault          #+#    #+#             */
+/*   Updated: 2019/04/14 16:46:03 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strclr(char *s)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	ft_bzero(s, ft_strlen(s));
+	size_t		i;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while ((n > i + 1) && (s1[i] == s2[i]) && s1[i] && s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

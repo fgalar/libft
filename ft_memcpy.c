@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclr.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/14 15:52:14 by fgarault          #+#    #+#             */
-/*   Updated: 2019/04/14 15:54:15 by fgarault         ###   ########.fr       */
+/*   Created: 2019/04/09 17:56:10 by fgarault          #+#    #+#             */
+/*   Updated: 2019/04/10 15:20:52 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strclr(char *s)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	ft_bzero(s, ft_strlen(s));
+	char	*ch_t_dest;
+	char	*ch_t_src;
+	int		i;
+
+	ch_t_dest = (char*)dst;
+	ch_t_src = (char*)src;
+	i = 0;
+	while (n && (ch_t_dest[i] || ch_t_src[i]))
+	{
+		ch_t_dest[i] = ch_t_src[i];
+		i++;
+		n--;
+	}
+	return (dst);
 }
