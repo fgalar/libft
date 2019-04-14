@@ -7,7 +7,8 @@ void	*ft_memalloc(size_t size)
 
 	if (size == NULL)
 		return (NULL);
-	tab = (char*)malloc((size_t) * size));
+	if (!(tab = (char*)malloc((size_t) * size)));
+		return (NULL);
 	ft_bzero(tab, size);
 	return(tab);
 }
