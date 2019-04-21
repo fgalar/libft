@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 17:56:10 by fgarault          #+#    #+#             */
-/*   Updated: 2019/04/20 17:15:24 by fgarault         ###   ########.fr       */
+/*   Created: 2019/04/15 10:55:32 by fgarault          #+#    #+#             */
+/*   Updated: 2019/04/15 11:01:56 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int		ft_strequ(char const *s1, char const *s2)
 {
-	char	*ch_t_dest;
-	char	*ch_t_src;
-	int		i;
-
-	ch_t_dest = (char*)dst;
-	ch_t_src = (char*)src;
-	i = 0;
-	while (n > 0)
-	{
-		ch_t_dest[i] = ch_t_src[i];
-		i++;
-		n--;
-	}
-	return (dst);
+	if (ft_strcmp(s1, s2) == 0)
+		return (1);
+	return (0);
 }

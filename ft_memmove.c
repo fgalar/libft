@@ -6,7 +6,7 @@
 /*   By: fgarault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 19:47:39 by fgarault          #+#    #+#             */
-/*   Updated: 2019/04/11 15:38:05 by fgarault         ###   ########.fr       */
+/*   Updated: 2019/04/20 18:50:19 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*tmp_zone;
+	void	*tmp_zone;
 
-	tmp_zone = (char*)malloc(sizeof(char) * len);
-	memcpy(tmp_zone, src, len);
-	memcpy(dst, tmp_zone, len);
+	if (!(tmp_zone = (void*)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	ft_memcpy(tmp_zone, src, len);
+	ft_memcpy(dst, tmp_zone, len);
+	free(tmp_zone);
 	return (dst);
 }

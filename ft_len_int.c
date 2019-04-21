@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_len_int.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/09 17:56:10 by fgarault          #+#    #+#             */
-/*   Updated: 2019/04/20 17:15:24 by fgarault         ###   ########.fr       */
+/*   Created: 2019/04/19 22:49:30 by fgarault          #+#    #+#             */
+/*   Updated: 2019/04/19 22:49:33 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int		ft_len_int(int n)
 {
-	char	*ch_t_dest;
-	char	*ch_t_src;
-	int		i;
+	int				len;
+	int				sign;
+	unsigned int	nb;
 
-	ch_t_dest = (char*)dst;
-	ch_t_src = (char*)src;
-	i = 0;
-	while (n > 0)
+	len = 1;
+	sign = -1;
+	if (n < 0)
 	{
-		ch_t_dest[i] = ch_t_src[i];
-		i++;
-		n--;
+		len++;
+		n *= sign;
 	}
-	return (dst);
+	nb = n;
+	while (nb >= 10)
+	{
+		nb /= 10;
+		len++;
+	}
+	return (len);
 }

@@ -6,91 +6,90 @@
 /*   By: fgarault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 13:46:23 by fgarault          #+#    #+#             */
-/*   Updated: 2019/04/17 18:28:22 by fgarault         ###   ########.fr       */
+/*   Updated: 2019/04/19 16:31:48 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-#include <stdio.h>
-int		ft_strcount(const char *s, char c)
+char	*ft_strduptil(const char *src, char c)
 {
-	unsigned int	count;
-	unsigned int	i;
-	
-	count = 0;
-	i = 1;
-	while (s[i])
-	{	
-		if (s[i] == c && s[i - 1] != c )
-			count++;
+	char	*dest;
+	int		i;
+
+	i = 0;
+	while (src[i] != c && src[i])
+		i++;
+	if (!(dest = (char*)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	i = 0;
+	while (src[i] != c && src[i])
+	{
+		dest[i] = src[i];
 		i++;
 	}
-	if (s[i] == '\0' && s[i - 1] != c)
-		count++;
+	dest[i] = '\0';
+	return (dest);
+}
+
+int		ft_strcount(const char *s, char c)
+{
+	int		count;
+	int		i;
+
+	count = 0;
+	i = 0;
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i] != c && s[i])
+		{
+			count++;
+			while (s[i] != c && s[i])
+				i++;
+		}
+	}
 	return (count);
 }
-unsigned int	ft_strclen(const char *s, char c)
+
+int		ft_strclen(const char *s, char c)
 {
-	unsigned int		upper;
-	unsigned int		lower;
+	int		upper;
+	int		lower;
 
 	upper = 0;
 	lower = 0;
-	while (s[upper] == c)
+	while (s[upper] == c && s[upper])
 		upper++;
 	lower = upper;
-	while (s[upper] != c)
+	while (s[upper] != c && s[upper])
 		upper++;
 	return (upper - lower);
 }
 
 char	**ft_strsplit(char const *s, char c)
 {
-	char	**tab;
+	char	**tabstr;
 	int		y;
-	int		nb_str;
-	int		splitator;
+	int		x;
+	int		words;
 
 	y = 0;
-	nb_str = ft_strcount(s, c);
-	splitator = 0;
-	if ((tab = (char**)malloc(sizeof(char*) * nb_str)) == NULL)
+	x = 0;
+	words = ft_strcount(s, c);
+	if (!(tabstr = (char**)malloc(sizeof(char*) * (words + 1))))
 		return (NULL);
-	while (y <= nb_str && s[splitator])
+	while (y < words && s[x])
 	{
-		while (s[splitator] == c && s[splitator - 1] != c && s[splitator])
-			splitator++;
-		tab[y] = ft_strsub(s, splitator, ft_strclen(s, c));
-		splitator = splitator + ft_strlen(tab[y]) + 1;
+		while (s[x] == c)
+			x++;
+		if (!(tabstr[y] = ft_strduptil(&s[x], c)))
+			return (NULL);
 		y++;
+		x += ft_strclen(&s[x], c);
 	}
-	return (tab);
-}
-
-
-#include <unistd.h>
-	void	ft_print_result(char const *s)
-	{
-		int		len;
-		len = 0;
-		while (s[len])
-			len++;
-		write(1, s, len);
-	}
-
-int main ()
-{
-	int		i;
-
-	i = 0;
-	char **tabstr = ft_strsplit("**Salut **les **moches**", '*');
-	while (tabstr[i] != '\0')
-	{
-		ft_print_result(tabstr[i]);
-		write(1, "\n", 1);
-		i++;
-	}
-	return (0);
+	tabstr[y] = NULL;
+	return (tabstr);
 }
