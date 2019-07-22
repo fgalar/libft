@@ -1,43 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/19 20:29:05 by fgarault          #+#    #+#             */
-/*   Updated: 2019/07/17 18:27:14 by fgarault         ###   ########.fr       */
+/*   Created: 2019/04/19 22:49:30 by fgarault          #+#    #+#             */
+/*   Updated: 2019/07/18 08:57:54 by fanny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
-
-char		*ft_itoa(long long n)
+int		ft_nbrlen(long long n)
 {
-	char				*nbr;
-	int					i;
+	int					len;
+	int					sign;
 	unsigned long long	nb;
 
-	i = ft_nbrlen(n);
-	if (!(nbr = ft_strnew(i)))
-		return (NULL);
-	if (n <= 0)
+	len = 1;
+	sign = -1;
+	if (n < 0)
 	{
-		if (n == 0)
-		{
-			nbr[0] = '0';
-			return (nbr);
-		}
-		nbr[0] = '-';
-		n *= -1;
+		len++;
+		n *= sign;
 	}
-	nbr[i] = '\0';
 	nb = n;
-	while (i > 0 && nb > 0)
+	while (nb >= 10)
 	{
-		nbr[--i] = '0' + (nb % 10);
-		nb = nb / 10;
+		nb /= 10;
+		len++;
 	}
-	return (nbr);
+	return (len);
 }
