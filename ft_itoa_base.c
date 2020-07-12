@@ -6,7 +6,7 @@
 /*   By: fanny <fgarault@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 08:59:15 by fanny             #+#    #+#             */
-/*   Updated: 2019/07/21 14:30:07 by fanny            ###   ########.fr       */
+/*   Updated: 2020/07/12 15:53:42 by fanny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ char	*itoa_base(long long n, int base)
 	}
 	convert(n, base, nb, (len - 1));
 	nb[len] = '\0';
+	free(nb);
 	return (nb);
 }
