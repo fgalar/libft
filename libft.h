@@ -6,14 +6,16 @@
 /*   By: fgarault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/07 18:19:35 by fgarault          #+#    #+#             */
-/*   Updated: 2020/05/01 14:50:39 by fanny            ###   ########.fr       */
+/*   Updated: 2020/12/21 20:23:07 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
+# include <stdlib.h>
 # include "ft_printf/ft_printf.h"
+# define BASES "0123456789abcdef"
 # define BUFF_SIZE	1
 
 typedef struct		s_list
@@ -92,5 +94,7 @@ char				*itoa_base(long long n, int base);
 int					get_next_line(const int fd, char **line);
 char				*ft_utoa(unsigned long nb);
 int					ft_ismaj(int c);
+char				*ft_strndup(const char *s1, size_t n);
 int					ft_printf(const char *format, ...);
+int					gnl(const int fd, char **line, char **ptr);
 #endif

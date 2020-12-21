@@ -6,7 +6,7 @@
 /*   By: fgarault <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/19 20:29:05 by fgarault          #+#    #+#             */
-/*   Updated: 2020/07/12 15:52:42 by fanny            ###   ########.fr       */
+/*   Updated: 2020/12/21 20:15:08 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char		*ft_itoa(long long n)
 	unsigned long long	nb;
 
 	i = ft_nbrlen(n);
-	if (!(nbr = ft_strnew(i)))
+	if (!(nbr = ft_strnew(i) + 1))
 		return (NULL);
 	if (n <= 0)
 	{
@@ -39,6 +39,5 @@ char		*ft_itoa(long long n)
 		nbr[--i] = '0' + (nb % 10);
 		nb = nb / 10;
 	}
-	free(nbr);
 	return (nbr);
 }

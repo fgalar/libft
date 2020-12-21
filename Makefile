@@ -6,7 +6,7 @@
 #    By: fgarault <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/07 17:50:20 by fgarault          #+#    #+#              #
-#    Updated: 2020/05/01 18:10:35 by fanny            ###   ########.fr        #
+#    Updated: 2020/12/21 19:05:23 by fgarault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRCS	=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c	\
 			ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c	ft_lstmap.c	\
 			ft_nbrlen.c ft_print_tab.c ft_print_tab_int.c ft_power.c 		\
 			ft_sort_integer.c ft_itoa_base.c get_next_line.c ft_utoa.c		\
-			ft_ismaj.c
+			ft_ismaj.c ft_strndup.c gnl.c
 
 PFDIR	=	ft_printf
 PFHEADER=	ft_printf.h
