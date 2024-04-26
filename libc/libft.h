@@ -14,7 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 # include <stdlib.h>
-# include "ft_printf/ft_printf.h"
+# include "../ft_printf/ft_printf.h"
 # define BASES "0123456789abcdef"
 # define BUFF_SIZE	1
 
@@ -42,8 +42,7 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *haystack, const char *needle);
-char				*ft_strnstr(const char *haystack, const char *needle,
-		size_t len);
+char				*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);

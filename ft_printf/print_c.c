@@ -34,19 +34,18 @@ static void	handle_null(t_data *data)
 	}
 }
 
-int			print_c(t_data *data)
+int	print_c(t_data *data)
 {
 	unsigned char	c;
 
 	c = va_arg(data->arg, int);
-	data->precis == data->width_max ? data->width_max = data->field :
-	data->width_max;
+	data->precis == data->width_max ? data->width_max = data->field : data->width_max;
 	data->precis = 0;
 	data->flag[point] = 0;
 	data->flag[space] = 0;
 	if (data->width_max > 1000)
 	{
-		print_buff((char*)&c, data);
+		print_buff((char *)&c, data);
 		return (0);
 	}
 	if (c == 0)

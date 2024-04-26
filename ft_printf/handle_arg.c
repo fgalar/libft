@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-static void		get_prefix(t_data *d, int len_t, int len_arg)
+static void	get_prefix(t_data *d, int len_t, int len_arg)
 {
-	int		len;
+	int	len;
 
 	if ((d->conv == 'd' || d->conv == 'f') && (d->neg || d->flag[most]))
 		d->neg ? ft_strcpy(d->prefix, "-") : ft_strcpy(d->prefix, "+");
@@ -40,39 +40,38 @@ static void		get_prefix(t_data *d, int len_t, int len_arg)
 	}
 }
 
-static int		get_arg_size(t_data *d, void *arg)
+static int	get_arg_size(t_data *d, void *arg)
 {
-	int		a_len;
-	int		p_len;
-	int		t_len;
+	int	a_len;
+	int	p_len;
+	int	t_len;
 
 	p_len = 0;
 	t_len = 0;
-	d->flag[point] && !d->precis && !ft_strcmp(arg, "0") ? (a_len = 0) :
-		(a_len = ft_strlen(arg));
+	d->flag[point] && !d->precis && !ft_strcmp(arg,
+		"0") ? (a_len = 0) : (a_len = ft_strlen(arg));
 	if (((d->conv == 'x' || d->conv == 'X' || d->conv == 'o') && d->flag[diese])
-		|| ((d->conv == 'd' || d->conv == 'f')
-			&& (d->flag[space] || d->flag[most] || d->neg)))
+		|| ((d->conv == 'd' || d->conv == 'f') && (d->flag[space]
+				|| d->flag[most] || d->neg)))
 	{
 		if ((d->conv == 'X' || d->conv == 'x') && ft_strcmp(arg, "0"))
 			p_len = 2;
 		else if (d->conv == 'd' || d->conv == 'f' || d->conv == 'o')
 			p_len = 1;
-		(ft_strcmp(arg, "0") || d->flag[most] || d->flag[space]) ? d->prfx = 1 :
-			0;
+		(ft_strcmp(arg, "0") || d->flag[most]
+				|| d->flag[space]) ? d->prfx = 1 : 0;
 	}
 	else if (d->conv == 'p')
 		p_len = 2;
-	d->precis >= a_len ? t_len = d->precis + p_len :
-		(t_len = p_len + a_len);
+	d->precis >= a_len ? t_len = d->precis + p_len : (t_len = p_len + a_len);
 	d->field > t_len ? t_len = d->field : 0;
 	return (t_len);
 }
 
-static void		get_precis(t_data *d, int len_t)
+static void	get_precis(t_data *d, int len_t)
 {
-	int		width_precis;
-	int		len_prfx;
+	int	width_precis;
+	int	len_prfx;
 
 	len_prfx = ft_strlen(d->prefix);
 	if (!d->flag[less] && d->precis)
@@ -85,11 +84,11 @@ static void		get_precis(t_data *d, int len_t)
 	d->ad_pf += width_precis;
 }
 
-static void		get_arg(t_data *d, char *arg, int len)
+static void	get_arg(t_data *d, char *arg, int len)
 {
-	int		len_p;
-	int		len_arg;
-	int		place;
+	int	len_p;
+	int	len_arg;
+	int	place;
 
 	len_p = ft_strlen(d->prefix);
 	len_arg = ft_strlen(arg);
@@ -97,28 +96,27 @@ static void		get_arg(t_data *d, char *arg, int len)
 	if (d->flag[less] && d->width_max >= len)
 	{
 		if (!d->prfx)
-			d->precis > len_arg ? (place = d->precis - len_arg) :
-			(place = 0);
+			d->precis > len_arg ? (place = d->precis - len_arg) : (place = 0);
 		else if (d->prfx)
-			d->precis > len_arg ? (place = (d->precis + len_p) - len_arg) :
-			(place = len_p);
+			d->precis > len_arg ? (place = (d->precis + len_p)
+				- len_arg) : (place = len_p);
 		ft_strncpy(&d->argument[place], arg, len_arg);
 	}
 	else if (d->precis > (len_arg + len_p) && d->precis > d->field)
 		ft_strncpy(&d->argument[d->ad_pf - len_arg], arg, len_arg);
 	else
-		ft_strncpy(&d->argument[(len) - len_arg], arg, len_arg);
+		ft_strncpy(&d->argument[(len)-len_arg], arg, len_arg);
 }
 
-void			handler(t_data *d, void *arg)
+void	handler(t_data *d, void *arg)
 {
-	int		len;
-	int		len_brut;
+	int	len;
+	int	len_brut;
 
 	len = get_arg_size(d, arg);
 	len_brut = ft_strlen(arg);
 	if (!ft_strcmp(arg, "0") && !d->precis && d->flag[point] && (!d->flag[diese]
-		|| d->conv != 'o'))
+			|| d->conv != 'o'))
 		len_brut = 0;
 	if ((d->flag[zero] && d->flag[less]) || d->flag[point])
 		d->flag[zero] = 0;

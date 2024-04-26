@@ -49,8 +49,8 @@ int			print_f(t_data *data)
 		n = va_arg(data->arg, double);
 	ft_bzero(f_char, 4096);
 	f_nbr.fl = n;
-	f_nbr.b_count.sign ? (data->neg = 1 && ft_strcat(data->prefix, "-")) : 0;
-	if (f_nbr.b_count.exp == 0b111111111111111)
+	f_nbr.s_count.sign ? (data->neg = 1 && ft_strcat(data->prefix, "-")) : 0;
+	if (f_nbr.s_count.exp == 0b111111111111111)
 	{
 		ft_strcat(f_char, "inf");
 		data->flag[zero] = 0;

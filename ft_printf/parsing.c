@@ -12,10 +12,10 @@
 
 #include "ft_printf.h"
 
-static int		get_flag(t_data *d, const char *format)
+static int	get_flag(t_data *d, const char *format)
 {
-	static char *flags[NB_FLAGS] = {"hh", "h", "ll", "l", "#", "+", " ", "-",
-	"0", "%", "."};
+	static char	*flags[NB_FLAGS] = {"hh", "h", "ll", "l", "#", "+", " ", "-",
+			"0", "%", "."};
 	int			y;
 
 	y = -1;
@@ -24,15 +24,15 @@ static int		get_flag(t_data *d, const char *format)
 		format[d->index] == 'L' && d->index++ ? d->flag[ll] = 1 : 0;
 		if (!ft_strncmp(flags[y], &format[d->index], ft_strlen(flags[y])))
 		{
-			((d->flag[hh] || d->flag[h] || d->flag[ll] || d->flag[l]) && y <= 3)
-			? init_new_arg(d) : 0;
+			((d->flag[hh] || d->flag[h] || d->flag[ll] || d->flag[l])
+				&& y <= 3) ? init_new_arg(d) : 0;
 			d->flag[y] = 1;
 			if (d->flag[percent])
 				return (1);
 			d->index += ft_strlen(flags[y]);
 			if (y == 10)
-				format[d->index] == '0' ? d->index++ && (d->precis = 0) :
-				(d->precis = 0);
+				format[d->index] == '0' ? d->index++
+					&& (d->precis = 0) : (d->precis = 0);
 			get_flag(d, format);
 		}
 		if (ft_isdigit(format[d->index]) && format[d->index] != '0')
@@ -41,9 +41,9 @@ static int		get_flag(t_data *d, const char *format)
 	return (0);
 }
 
-void			get_size(t_data *data, const char *format)
+void	get_size(t_data *data, const char *format)
 {
-	int		n_size;
+	int	n_size;
 
 	n_size = ft_atoi(&format[data->index]);
 	if (n_size < 0)
@@ -54,8 +54,8 @@ void			get_size(t_data *data, const char *format)
 		data->index = ft_strlen(format);
 		return ;
 	}
-	if (format[data->index - 1] == '.'
-		|| (data->flag[point] && data->precis == 0))
+	if (format[data->index - 1] == '.' || (data->flag[point]
+			&& data->precis == 0))
 		data->precis = n_size;
 	else
 		data->field = n_size;
@@ -70,10 +70,10 @@ void			get_size(t_data *data, const char *format)
 	get_flag(data, format);
 }
 
-static void		get_conv(t_data *data, const char *format)
+static void	get_conv(t_data *data, const char *format)
 {
-	static char	conv[NB_CONV] = {'c', 's', 'p', 'd',
-						'i', 'o', 'u', 'x', 'X', 'f'};
+	static char	conv[NB_CONV] = {'c', 's', 'p', 'd', 'i', 'o', 'u', 'x', 'X',
+			'f'};
 	int			y;
 	char		c;
 
@@ -92,7 +92,7 @@ static void		get_conv(t_data *data, const char *format)
 	}
 }
 
-void			parsing(t_data *data, const char *format)
+void	parsing(t_data *data, const char *format)
 {
 	if (format[data->index] == '%')
 	{

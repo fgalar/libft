@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int		print_u(t_data *data)
+int	print_u(t_data *data)
 {
 	char	*nb;
 

@@ -14,10 +14,9 @@
 
 static long long	ft_floatlen(long double f, int precision, t_data *d)
 {
-	long long		len;
+	long long	len;
 
-	precision ? len = precision + 1 :
-	(len = 0);
+	precision ? len = precision + 1 : (len = 0);
 	if (f < 0)
 		f *= -1.0;
 	if (f <= 1.0)
@@ -31,38 +30,46 @@ static long long	ft_floatlen(long double f, int precision, t_data *d)
 	return (len + d->prfx);
 }
 
-static void			ft_round(char *tab, long double f, int len, t_data *d)
+static void	ft_round(char *tab, long double f, int len, t_data *d)
 {
-	int		i;
-	int		ret;
+	int	i;
+	int	ret;
 
 	i = ft_strlen(tab) - 1;
 	ret = 1;
-	(f >= 5 && f < 6) ? (f -= (int)f) && (f *= 10) : 0;
+	if (f >= 6 && f < 6)
+	{
+		f -= (int)f;
+		f *= 10;
+	}
 	while (i + 1 > -len + d->prfx)
 	{
-		if (f < 1.0 && d->precis > 1)
-			!is_even(tab[i]) ? (tab[i]++ && (ret = 0)) : 0;
+		if (f < 1.0 && d->precis > 1 && !is_even(tab[i]))
+		{
+			tab[i]++;
+			ret = 0;
+		}
 		else if (ft_isdigit(tab[i]) && (tab[i] += 1))
 			ret = 0;
 		if (!ft_isdigit(tab[i]))
 		{
-			if (tab[i] == '.')
-				ret ? (tab[i - 1] += 1) && (i -= 2) : 0;
-			else
-				tab[i] == ' ' ? (tab[i] = '1') :
-				(tab[i] = '0');
+			if (tab[i] == '.' && ret)
+			{
+				tab[i - 1] += 1;
+				i -= 2;
+			}
+			else if (tab[i] == ' ')
+			{
+				tab[i] = '1';
+			}
 			i--;
 		}
-		else
-			return ;
 	}
 }
 
-static void			memset_integer_part(char *tab, long double *f,
-int len, t_data *d)
+static void	memset_integer_part(char *tab, long double *f, int len, t_data *d)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (*f < 0)
@@ -82,10 +89,9 @@ int len, t_data *d)
 	}
 }
 
-static void			memset_decimal_part(char *tab, long double f, int len,
-t_data *d)
+static void	memset_decimal_part(char *tab, long double f, int len, t_data *d)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (i < d->precis)
@@ -99,7 +105,7 @@ t_data *d)
 		ft_round(tab, f, len, d);
 }
 
-char				*ft_float(t_data *d, long double f)
+char	*ft_float(t_data *d, long double f)
 {
 	long long	len;
 	char		*tab;

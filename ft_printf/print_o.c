@@ -12,12 +12,12 @@
 
 #include "ft_printf.h"
 
-int		print_o_core(t_data *data, char *oct)
+int	print_o_core(t_data *data, char *oct)
 {
 	if (!ft_strcmp(oct, "0") && data->flag[diese])
 	{
 		data->flag[diese] = 0;
-		data->flag[point] && !data->precis ? data->precis += 1 : 0;
+		data->flag[point] &&!data->precis ? data->precis += 1 : 0;
 	}
 	data->flag[space] = 0;
 	data->width_max < 1000 ? handler(data, oct) : 0;
@@ -29,7 +29,7 @@ int		print_o_core(t_data *data, char *oct)
 	return (1);
 }
 
-int		print_o(t_data *data)
+int	print_o(t_data *data)
 {
 	char	*oct;
 

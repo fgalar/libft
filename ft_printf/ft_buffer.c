@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int		buff_purge(t_data *data)
+int	buff_purge(t_data *data)
 {
 	write(1, data->buffer, data->len);
 	ft_bzero(data->buffer, data->len);
@@ -21,19 +21,17 @@ int		buff_purge(t_data *data)
 	return (data->size);
 }
 
-int		print_buff(char *s, t_data *d)
+int	print_buff(char *s, t_data *d)
 {
 	int		len;
 	int		len_p;
 	char	a;
 	int		i;
 
-	d->precis < (int)ft_strlen(s) && d->flag[point] ? (len = d->precis) :
-	(len = ft_strlen(s));
-	d->field > len ? (len_p = d->field - len) :
-	(len_p = 0);
-	d->flag[zero] && !d->flag[less] ? (a = '0') :
-	(a = ' ');
+	d->precis < (int)ft_strlen(s)
+		&& d->flag[point] ? (len = d->precis) : (len = ft_strlen(s));
+	d->field > len ? (len_p = d->field - len) : (len_p = 0);
+	d->flag[zero] && !d->flag[less] ? (a = '0') : (a = ' ');
 	i = -1;
 	buff_purge(d);
 	if ((d->flag[zero] || d->field) && !d->flag[less])

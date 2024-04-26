@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int		print_p(t_data *data)
+int	print_p(t_data *data)
 {
 	long long	*address;
 	char		*tab;
@@ -20,7 +20,7 @@ int		print_p(t_data *data)
 	data->prfx = 1;
 	data->flag[space] = 0;
 	ft_strncpy(data->prefix, "0x", 2);
-	address = va_arg(data->arg, void*);
+	address = va_arg(data->arg, void *);
 	tab = itoa_base((unsigned long long)address, 16);
 	if (data->width_max < 1000)
 		handler(data, tab);

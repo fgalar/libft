@@ -17,7 +17,7 @@ int	ft_printf(const char *format, ...)
 	t_data	*data;
 	int		index;
 
-	if (!(data = (t_data*)malloc(sizeof(t_data))))
+	if (!(data = (t_data *)malloc(sizeof(t_data))))
 		return (-1);
 	init_struct(data);
 	va_start(data->arg, format);

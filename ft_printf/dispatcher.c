@@ -12,13 +12,13 @@
 
 #include "ft_printf.h"
 
-int			dispatcher(t_data *data, const char *format)
+int	dispatcher(t_data *data, const char *format)
 {
 	int			x;
 	static char	conv[NB_CONV] = {'c', 's', 'p', 'd', 'o', 'u', 'x', 'X', 'f'};
-	static int	(*go_ft[NB_CONV])(t_data *data) = {print_c, print_s, print_p,
-		print_d, print_o, print_u, print_x, print_x, print_f};
 
+	static int (*go_ft[NB_CONV])(t_data * data) = {print_c, print_s, print_p,
+		print_d, print_o, print_u, print_x, print_x, print_f};
 	x = 0;
 	if (!data->conv)
 	{

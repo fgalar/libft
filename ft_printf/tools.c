@@ -29,7 +29,7 @@ void	print_a(t_data *d, unsigned char c)
 {
 	d->precis = 0;
 	d->flag[point] = 0;
-	handler(d, (char*)&c);
+	handler(d, (char *)&c);
 	ft_strcat(d->buffer, d->argument);
 	d->len += ft_strlen(d->argument);
 	d->index++;
@@ -68,7 +68,7 @@ void	init_struct(t_data *d)
 	d->ad_pf = 0;
 }
 
-int		is_even(char n)
+int	is_even(char n)
 {
 	if (n == '0' || n == '2' || n == '4' || n == '6' || n == '8')
 		return (1);

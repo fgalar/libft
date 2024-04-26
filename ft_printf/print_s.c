@@ -18,10 +18,9 @@ static char	*precis_str(t_data *d, char *s)
 	int		i;
 	char	*arg;
 
-	d->flag[point] ? (len = d->precis) :
-	(len = ft_strlen(s));
+	d->flag[point] ? (len = d->precis) : (len = ft_strlen(s));
 	i = 0;
-	if (!(arg = (char*)malloc(sizeof(char) * (d->precis + 1))))
+	if (!(arg = (char *)malloc(sizeof(char) * (d->precis + 1))))
 		return (NULL);
 	ft_bzero(arg, d->precis + 1);
 	while (len > i)
@@ -30,8 +29,7 @@ static char	*precis_str(t_data *d, char *s)
 		i++;
 	}
 	if (d->precis == d->width_max)
-		d->field ? (d->width_max = d->field) :
-		(d->width_max = 0);
+		d->field ? (d->width_max = d->field) : (d->width_max = 0);
 	d->precis = 0;
 	d->flag[point] = 0;
 	d->flag[zero] = 0;
@@ -39,11 +37,11 @@ static char	*precis_str(t_data *d, char *s)
 	return (arg);
 }
 
-int			print_s(t_data *data)
+int	print_s(t_data *data)
 {
 	char	*s;
 
-	s = va_arg(data->arg, char*);
+	s = va_arg(data->arg, char *);
 	if (!s)
 		s = "(null)";
 	if (!data->precis && data->flag[point])
