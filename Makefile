@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fgarault <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: fgarault <fgarault@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/07 17:50:20 by fgarault          #+#    #+#              #
-#    Updated: 2020/12/21 19:05:23 by fgarault         ###   ########.fr        #
+#    Updated: 2024/04/27 08:28:59 by fgarault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ WHITE	=	\033[1;39m
 RESET	=	\033[0m
 
 LIBCDIR	=	libc
-SRCS	=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c	\
+SRC		=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c	\
 			ft_memchr.c ft_memcmp.c ft_strlen.c ft_strdup.c ft_strcpy.c		\
 			ft_strncpy.c ft_strcat.c ft_strncat.c ft_strlcat.c ft_strchr.c	\
 			ft_strrchr.c ft_strstr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c	\
@@ -48,8 +48,8 @@ PFSRC	=	ft_printf.c dispatcher.c parsing.c print_c.c print_s.c print_p.c\
 		 	print_d.c print_o.c print_u.c print_x.c print_f.c ft_ftoa.c		\
 			handle_arg.c ft_buffer.c tools.c tools2.c
 
-OBJDIR	=	objs
-OBJS	=	$(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+OBJDIR	=	obj
+OBJ	=	$(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 PFOBJS	=	$(addprefix $(OBJDIR)/, $(PFSRC:.c=.o))
 
 all : $(NAME)
@@ -63,8 +63,8 @@ $(OBJDIR)/%.o: $(PFDIR)/%.c
 	@echo "$(YELLOW)Making object : $(PURPLE)$@$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(PFHEADER)
 
-$(NAME) : $(OBJDIR) $(OBJS) $(PFOBJS)
-	@ar rcs $(NAME) $(OBJS) $(PFOBJS)
+$(NAME) : $(OBJDIR) $(OBJ) $(PFOBJS)
+	@ar rcs $(NAME) $(OBJ) $(PFOBJS)
 	@ranlib $(NAME)
 	@echo "$(GREEN)[libft.a] compiled with success $(RESET)"
 
