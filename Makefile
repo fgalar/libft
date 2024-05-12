@@ -6,7 +6,7 @@
 #    By: fgarault <fgarault@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/07 17:50:20 by fgarault          #+#    #+#              #
-#    Updated: 2024/04/27 08:28:59 by fgarault         ###   ########.fr        #
+#    Updated: 2024/05/12 18:07:58 by fgarault         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,10 @@ SRC		=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c	\
 			ft_sort_integer.c ft_itoa_base.c get_next_line.c ft_utoa.c		\
 			ft_ismaj.c ft_strndup.c gnl.c
 
+MATHDIR = math
+MATHD	= math.h
+MATHSRC		= ft_floor.c, ft_abs.c, ft_sin.c
+
 PFDIR	=	ft_printf
 PFHEADER=	ft_printf.h
 PFSRC	=	ft_printf.c dispatcher.c parsing.c print_c.c print_s.c print_p.c\
@@ -49,27 +53,30 @@ PFSRC	=	ft_printf.c dispatcher.c parsing.c print_c.c print_s.c print_p.c\
 			handle_arg.c ft_buffer.c tools.c tools2.c
 
 OBJDIR	=	obj
-OBJ	=	$(addprefix $(OBJDIR)/, $(SRC:.c=.o))
+OBJ	=		$(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 PFOBJS	=	$(addprefix $(OBJDIR)/, $(PFSRC:.c=.o))
+MATHOBJ =	$(addprefix $(OBJDIR)/, $(MATHSRC:.c=.o))
 
 all : $(NAME)
 
 $(OBJDIR) :
 	@mkdir $@
 $(OBJDIR)/%.o: $(LIBCDIR)/%.c 
-	@echo "$(YELLOW)Making object : $(PURPLE)$@$(RESET)"
+	@echo "$(YELLOW)Making libc : $(PURPLE)$@$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
 $(OBJDIR)/%.o: $(PFDIR)/%.c
-	@echo "$(YELLOW)Making object : $(PURPLE)$@$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(PFHEADER)
+$(OBJDIR)/%.o: %(MATHDIR)/%.c
+	@echo "$(YELLOW)Making math : $(PURPLE)$@$(RESET)"
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(MATHD)
 
-$(NAME) : $(OBJDIR) $(OBJ) $(PFOBJS)
-	@ar rcs $(NAME) $(OBJ) $(PFOBJS)
+$(NAME) : $(OBJDIR) $(OBJ) $(PFOBJS) $(MATHOBJ)
+	@ar rcs $(NAME) $(OBJ) $(PFOBJS) $(MATHOBJ)
 	@ranlib $(NAME)
 	@echo "$(GREEN)[libft.a] compiled with success $(RESET)"
 
 norme :
-	@norminette -R $(LIBCDIR)/$(SRCS) $(PFDIR)/$(PFSRCS) $(LIBCDIR)/$(INCLUDE) $(PFDIR)/$(PFHEADER)
+	@norminette -R $(LIBCDIR)/$(SRCS) $(PFDIR)/$(PFSRCS) $(LIBCDIR)/$(INCLUDE) $(PFDIR)/$(PFHEADER) $(MATHDIR)/$(MATHD) $(MATHDIR)/$(MATHSRC)
 
 clean :
 	@rm -rf $(OBJDIR)
